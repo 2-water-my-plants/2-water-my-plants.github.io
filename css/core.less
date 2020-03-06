@@ -1,0 +1,481 @@
+// CSS Reset
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+// Mixins
+.flexrow() {display: flex;
+    flex-direction: row;}
+.flexaltrow() {display: flex;
+    flex-direction: row-reverse;}
+.flexcolumn() {display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;}
+.flexaltcolumn() {display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;}
+.text(@align, @size, @color) {
+	text-align: @align;
+    font-size: @size;
+    color: @color;}	
+
+
+// Variables
+@1175: ~"only screen and (min-width: 1175px)";
+@930: ~"only screen and (min-width: 930px)";
+@730: ~"only screen and (min-width: 730px)";
+@400: ~"only screen and (min-width: 400px)";
+@mainbg: #fff;
+@mainfont: #004d1a;
+@navbg: #e6e6e6;
+@navfont: #cc0066;
+@bordercolor: #009933;
+@titlefont: #000;
+@altbg: #ffc0cb;
+@border: 3px double @bordercolor;
+
+// Basics
+.center {margin: auto;}
+body {background-color: @mainbg;}
+
+// Navigation
+nav {.flexrow();
+    justify-content: space-evenly;
+    position: fixed;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: .3em;
+    border-bottom: @border;
+    background-color: @navbg;
+    z-index: 10;
+
+    a {.text(center, 1.2em, @navfont);
+        padding: .8em;
+        text-decoration: none;}
+
+    .active {background-color: @altbg;}
+
+    .desktop {display: none;}
+}
+
+@media @400 {
+    nav {margin: .4em;
+    
+        a {padding: 1.2em;}
+    }
+}
+
+@media @730 {
+    nav {align-items: center;
+
+        a {padding: .5em;}
+    
+        .desktop {display: block;}
+
+        img {width: 6rem;}
+    }
+}
+
+
+// Main Content
+.main {.flexcolumn();
+    position: relative;
+    top: 130px;
+
+    header {.flexcolumn();
+        color: @mainfont;
+
+        .heading {.flexcolumn();
+            padding: .2em;
+        
+            .desktop {display: none;}
+
+            h1 {.text(center, 2em, @titlefont);
+                font-weight: bold;}
+
+            h2 {.text(center, 1.5em, @mainfont);
+                padding: .5em;}
+
+            p {.text(center, 1em, @mainfont);
+                padding-top: 1em;}
+        }
+
+        img {width: 15rem;
+            margin: 1em;}
+    }
+    
+    .content {.flexcolumn();
+        padding: .5em;
+
+        h1 {.text(center, 1.7em, @mainfont);}
+
+        h2 {.text(center, 1.5em, @bordercolor);
+            padding: .5em;}
+
+        p {.text(center, 1.2em, @mainfont);}
+
+        .text {.flexcolumn();
+            padding: .5em;
+        
+            p {.text(center, 1.2em, @mainfont);
+                padding: .2em 1em 1em 1em;}
+        }
+
+        .team {.flexcolumn();
+
+            h1 {.text(center, 1.6em, @titlefont);
+                font-weight: bold;}
+        
+            .members {.flexcolumn();
+                padding: .5em;
+
+                .name {.flexcolumn();
+                
+                    h2 {.text(center, 1.5em, @mainfont);
+                        font-weight: bold;}
+    
+                    h3 {.text(center, 1.2em, @bordercolor);}
+                }
+
+                .person {.flexrow();
+                    .text(center, 1.2em, @mainfont);
+                    padding: .5em;
+                    justify-content: space-evenly;
+                
+                    img {border-radius: 40%;
+                        width: 7em;}
+
+                    a {.text(center, 1em, @mainfont);
+                        padding-left: .2em;
+                        text-decoration: none;
+                        justify-content: center;
+                        align-self: center;}
+                }
+            }
+        }
+
+        .suggested {.flexcolumn();
+        
+            .plants {.flexcolumn();
+
+                img {width: 15em;
+                    padding: .5em;}
+                
+                .info {.flexcolumn();
+                    .text(left, 1.2em, @mainfont);
+                margin-bottom: 1em;
+            
+                h3 {.text(center, 1.2em, @mainfont);
+                    font-weight: bold;}
+                }
+            }
+        }
+    }
+
+    footer {.flexaltcolumn();
+        position: relative;
+        top: 60px;
+        border-top: @border;
+        border-bottom: @border;
+        width: 100%;
+        background-color: @altbg;
+        .text(center, 1.2em, @navfont);
+        padding: 1em 0;
+        margin-bottom: .2em;
+    
+        .text {.flexcolumn();}
+
+        .icon {.flexcolumn();
+            padding: .5em 0;
+        
+            img {width: 2em;}
+        }
+    }
+}
+
+@media @400 {
+    .main {top: 210px;
+
+        header {
+
+            .heading {
+
+                h1 {font-size: 3em;}
+
+                h2 {font-size: 1.6em;} 
+            }
+        
+            img {width: 20rem;}
+        }
+
+        .content {padding: 1em;
+        
+            .text {
+                
+                p {font-size: 1.5em;}
+            }
+
+            .team {
+
+                h1 {font-size: 1.8em;}
+
+                .members {width: 20em;
+
+                    .name {
+
+                        h2 {font-size: 1.7em;}
+
+                        h3 {font-size: 1.4em;}
+                    }
+
+                    .person {font-size: 1.3em;
+                    
+                        img {width: 9em;}
+
+                        a {padding: .8em;}
+                    }                    
+                }
+            }
+
+            .suggested {
+
+                .plants {
+
+                    img {width: 20em;}
+                }
+            }
+        }
+
+        footer {
+
+            .icon {
+
+                img {width: 4em;}
+            }
+        }
+    }
+}
+
+@media @730 {
+    .main {top: 90px;
+    
+        header {.flexrow();
+            justify-content: space-around;
+        
+            .heading {width: 25rem;
+
+                h1 {margin-top: 1em;}
+
+                h2 {font-size: 1.8em;}
+    
+                .desktop {display: block;
+                    width: 10rem;}
+            }
+
+            img {width: 18rem;}
+        }
+
+        .content {
+
+            .text {
+
+                p {padding: .2em 1em 1.5em 1em;}
+            }
+
+            .team {
+
+                h1 {font-size: 2.2em;}
+
+                .members {width: 40em;
+                    
+                    .name {.flexrow();
+                        flex-wrap: wrap;}
+
+                    .person {padding: 1em;
+
+                        img {width: 15rem;}
+
+                        a {padding: 1em;}
+                    }
+                }
+            }
+
+            .suggested {.flexrow();
+                flex-wrap: wrap;
+                justify-content: space-evenly;
+                align-items: center;
+            
+                .plants {padding: 1em;}
+            }
+        }
+
+        footer {.flexrow();
+        
+            .text {padding: 0 1em 0 .5em;}
+
+            .icon {padding: 0 .5em 0 1em;}
+        }
+    }
+}
+
+@media @930 {
+    .main {top: 125px;
+
+        header {
+
+            .heading {width: 35rem;
+
+                h1 {font-size: 4em;}
+
+                .desktop {width: 15rem;}
+            }
+        }
+
+        .content {
+        
+            .text {.flexrow();
+                justify-content: space-evenly;
+
+                p {padding: .2em 1.5em 1.5em 1.5em;}
+            }
+
+            .team {
+
+                h1 {font-size: 2.6em;}
+
+                .members {.flexrow();
+                    flex-wrap: wrap;
+                    width: 55em;
+                
+                    .name {.flexcolumn();}
+
+                    .person {
+
+                        img {width: 20rem;}
+                    }
+                }
+
+                .altrow {.flexaltrow();
+                    flex-wrap: wrap;
+                    width: 55em;
+                
+                    .name {.flexcolumn();}
+
+                    .person {
+
+                        img {width: 20rem;}
+                    }
+                }
+            }
+
+            .suggested {margin: 0;
+
+                .plants {padding: .5em;}
+            }
+        }
+
+        footer {line-height: 1.5;
+        
+            .text {padding: 0 1.5em;}
+
+            .icon {padding: 0 1.5em;
+            
+                img {width: 6em;}
+            }
+        }
+    }
+}
+
+@media @1175 {
+    .main {top: 80px;
+
+        header {
+
+            .heading {width: 45rem;
+            
+                h1 {font-size: 4.5em;}
+
+                h2 {font-size: 2.5em;}
+
+                .desktop {width: 20rem;}
+            }
+
+            img {width: 25rem;}
+        }
+
+        .content {
+
+            h1 {font-size: 3em;
+                padding: .5em;}
+
+            .team {
+
+                h1 {font-size: 3.3em;}
+
+                .members {width: 70em;}
+
+                .altrow {width: 70em;}
+            }
+            
+            .suggested {
+
+                .plants {padding: 2em;}
+            }
+        }
+
+        footer {.flexrow();
+            justify-content: space-around;
+        
+            p {padding: 1em;}
+        }
+    }
+}
+
